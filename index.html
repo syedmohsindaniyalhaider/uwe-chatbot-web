@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <title>Chatbot Widget</title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Import Font Awesome Icon Font-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0="
+      crossorigin="anonymous"
+    />
+
+    <!--Import materialize.css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/css/materialize.min.css"
+    />
+
+    <!--Main css-->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div><img src="./static/img/logo.svg" /></div>
+      <div>
+        <h4>Welcome to the UWE Bristol Student Support Chatbot</h4>
+      </div>
+      <div>
+        <p class="font-22">
+          Need help with your studies, campus services, or university life? Our
+          UWE Support Chatbot is here to provide instant answers to your
+          questions. Whether it’s about admissions, course details, or technical
+          support, we’ve got you covered – anytime, anywhere.
+        </p>
+        <p class="typewriter" id="demo"></p>
+      </div>
+      <!-- Modal for rendering the charts, declare this if you want to render charts, 
+         else you remove the modal -->
+      <div id="modal1" class="modal">
+        <canvas id="modal-chart"></canvas>
+      </div>
+
+      <!--chatbot widget -->
+      <div class="widget">
+        <div class="chat_header">
+          <!--Add the name of the bot here -->
+          <span class="chat_header_title">UWE Chatbot</span>
+          <span class="dropdown-trigger" href="#" data-target="dropdown1">
+            <i class="material-icons"> more_vert </i>
+          </span>
+
+          <!-- Dropdown menu-->
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#" id="clear">Clear</a></li>
+            <li><a href="#" id="restart">Restart</a></li>
+            <li><a href="#" id="close">Close</a></li>
+          </ul>
+        </div>
+
+        <!--Chatbot contents goes here -->
+        <div class="chats" id="chats">
+          <div class="clearfix"></div>
+        </div>
+
+        <!--keypad for user to type the message -->
+        <div class="keypad">
+          <textarea
+            id="userInput"
+            placeholder="Type a message..."
+            class="usrInput"
+          ></textarea>
+          <div id="sendButton">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+
+      <!--bot profile-->
+      <div class="profile_div" id="profile_div">
+        <img class="imgProfile" src="static/img/botAvatar.png" />
+      </div>
+
+      <!-- Bot pop-up intro -->
+      <div class="tap-target" data-target="profile_div">
+        <div class="tap-target-content">
+          <h5 class="white-text">Hey there 👋</h5>
+          <p class="white-text">
+            I am a UWE Support Chatbot which help students.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script>
+      var items = [
+        "Get step-by-step guidance on how to complete your student registration, from form submission to confirmation.",
+        "Find out how to connect to the UWE Wi-Fi network on campus, including troubleshooting tips for common issues.",
+        "Access detailed maps for all UWE campuses, and get directions to your lecture halls, libraries, and more.",
+        "Receive information on how to pay your fees, including details on installment plans, deadlines, and accepted payment methods.",
+        "Explore accommodation options, learn about rent payment schedules, and find support for any housing-related concerns.",
+        "Get advice on student finance, bursaries, and scholarships, along with guidance on managing your student income.",
+        "Discover job opportunities, internships, and career advice tailored for UWE students, both on and off campus.",
+        "Learn about parking options, permits, and guidelines for students who drive to campus.",
+        "Easily connect with the appropriate support teams for your specific issues, from academic queries to personal support services.",
+      ];
+
+      var i = 0;
+      var speed = 1; // Typing speed
+
+      function typeWriter() {
+        if (i < items.length) {
+          var listItem = document.createElement("li");
+          var text = items[i];
+          document.getElementById("demo").appendChild(listItem);
+
+          (function showText(j = 0) {
+            if (j < text.length) {
+              listItem.innerHTML += text.charAt(j);
+              setTimeout(() => showText(j + 1), speed);
+            } else {
+              i++;
+              typeWriter(); // Move to the next item after typing finishes
+            }
+          })();
+        }
+      }
+
+      document.getElementById("demo").innerHTML = "<ul></ul>";
+      typeWriter(); // Start typing effect
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="static/js/lib/materialize.min.js"
+    ></script>
+    <script src="static/js/lib/uuid.min.js"></script>
+    <!--Main Script -->
+    <script type="text/javascript" src="static/js/script.js"></script>
+
+    <!--Chart.js Script -->
+    <script type="text/javascript" src="static/js/lib/chart.min.js"></script>
+    <script type="text/javascript" src="static/js/lib/showdown.min.js"></script>
+  </body>
+</html>
